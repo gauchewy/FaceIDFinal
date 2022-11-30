@@ -22,14 +22,21 @@ struct ContentView: View {
                         Text("Welcome in! You are now authenticated.")
                             .foregroundColor(.white)
                         
-                        PrimaryButton(showImage: false, text: "Logout")
-                            .onTapGesture {
-                                print("test")
-                                authenticationManager.logout()
-                            }
+                        NavigationLink(destination: LoginView(), label:{
+                            Text("go back")
+                        })
+                        
+//                        PrimaryButton(showImage: false, text: "Back")
+//                            .onTapGesture {
+//                                authenticationManager.logout()
+//                            }
                     }
+                    .navigationTitle("test title")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing))
+                    
+                    
+                    
                 } else {
                     LoginView()
                         .environmentObject(authenticationManager)
