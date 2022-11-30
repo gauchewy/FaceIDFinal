@@ -11,27 +11,30 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var authenticationManager = AuthenticationManager()
+    @State private var chickens = ["chicken1", "chicken2", "chicken3"]
+    @EnvironmentObject var appInfo: ChickenData
+    @State private var image: UIImage?
      
     var body: some View {
         NavigationView {
             VStack {
                 if authenticationManager.isAuthenticated {
                     VStack(spacing: 40) {
-                        Title()
+                        //Title()
                         
-                        Text("Welcome in! You are now authenticated.")
-                            .foregroundColor(.white)
+                        Image(uiImage: image ?? UIImage(named: chickens[appInfo.chosenChicken])!)
+                            .resizable()
+                            .frame(width: 300, height: 300)
                         
-                        NavigationLink(destination: LoginView(), label:{
-                            Text("go back")
-                        })
+//                        NavigationLink(destination: LoginView(), label:{
+//                            Text("go back")
+//                        })
                         
-//                        PrimaryButton(showImage: false, text: "Back")
-//                            .onTapGesture {
-//                                authenticationManager.logout()
-//                            }
+                        PrimaryButton(showImage: false, text: "Back")
+                            .onTapGesture {
+                                authenticationManager.logout()
+                            }
                     }
-                    .navigationTitle("test title")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing))
                     

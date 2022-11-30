@@ -50,6 +50,7 @@ struct LoginView: View {
 
     @State private var chickens = ["chicken1", "chicken2", "chicken3"]
     @State private var showSheet = false
+    @EnvironmentObject var appInfo: ChickenData
     
     var body: some View {
         ZStack{
@@ -67,6 +68,7 @@ struct LoginView: View {
                     ForEach(0..<3){ num in
                         Button{
                             showSheet.toggle()
+                            appInfo.chosenChicken = num
                         }label: {
                             Image(chickens[num])
                                 .renderingMode(.original)
@@ -89,4 +91,8 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
             .environmentObject(AuthenticationManager())
     }
+}
+
+class ChickenData: ObservableObject{
+    @Published var chosenChicken = 0
 }

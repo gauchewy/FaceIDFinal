@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct FaceIDFinalApp: App {
+    @StateObject var appInfo = ChickenData()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(appInfo)
         }
     }
 }
